@@ -12,15 +12,11 @@ export default class Cart {
     }
     
     priceAll(): number {
-        let finalPrice: number = 0
-        this._items.forEach(item => {finalPrice += item.price})
-        return finalPrice
+        return this._items.reduce<number>((sum, current) => sum + current.price, 0)
     }
 
     priceAllWithDiscount(discount: number): number {
-        let finalPrice: number = 0
-        this._items.forEach(item => {finalPrice += item.price})
-        return finalPrice * ((100 - discount)/100)
+        return this.priceAll() * ((100 - discount)/100)
     }
 
     deleteItem(id: number): void {
